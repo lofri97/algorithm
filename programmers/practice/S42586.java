@@ -7,6 +7,9 @@ import java.util.Queue;
 /**
  * 코딩테스트 연습 > 스택/큐 > 기능개발
  * <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42586">기능개발</a>
+ *
+ * 시간 복잡도 : O(n)
+ * 공간 복잡도 : O(n)
  */
 public class S42586 {
     public static void main(String[] args) {
