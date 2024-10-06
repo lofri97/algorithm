@@ -11,9 +11,7 @@ class Solution {
                 arr[i] = arr[i - 2] + cost[i];
             }
         }
-        if (arr[cost.length - 1] < arr[cost.length-2]) {
-            return arr[cost.length - 1];
-        } 
-        return arr[cost.length -2];
+
+        return Math.min(arr[cost.length -1], arr[cost.length - 2]);
     }
 }
