@@ -13,12 +13,11 @@ class Solution {
             if (!map.containsKey(name)) {
                 return name;
             }
-            Integer count = map.get(name);
-            if (--count == 0) {
+            if (map.get(name) == 1) {
                 map.remove(name);
                 continue;
             }
-            map.put(name, count);
+            map.put(name, map.get(name) - 1);
             
         }
         return "error";
