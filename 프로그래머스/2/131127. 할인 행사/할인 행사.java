@@ -35,11 +35,3 @@ class Solution {
         return true;
     }
 }
-
-/**
-슬라이딩 윈도우를 이용하자.
-먼저 number 까지의 숫자를 돌면서 이를 Map<String, Integer> 에 저장한다.
-윈도우 값이 설정되었을 경우 체크.
-하루씩 넘어가면서 체크.
-
-**/
