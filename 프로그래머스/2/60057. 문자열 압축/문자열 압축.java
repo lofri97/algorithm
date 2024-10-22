@@ -4,7 +4,7 @@ class Solution {
     public int solution(String s) {
         int answer = Integer.MAX_VALUE;
         
-        for (int length = 1; length <= s.length(); length++) {
+        for (int length = 1; length <= s.length() /2 + 1; length++) {
             
             int count = 0;
             String prev = "";
