@@ -2,17 +2,27 @@ class Solution {
     public int[][] solution(int[][] arr1, int[][] arr2) {
         int[][] answer = new int[arr1.length][arr2[0].length];
         
-        for (int ay = 0; ay < answer.length; ay++) {
-            for (int ax = 0; ax < answer[0].length; ax++) {
-                int val = 0;
+        for (int y = 0; y < arr1.length; y++) {
+            for (int x = 0; x < arr2[0].length; x++) {
+                int sum = 0;
                 
                 for (int i = 0; i < arr2.length; i++) {
-                    val += arr1[ay][i] * arr2[i][ax];
+                    sum += arr1[y][i] * arr2[i][x];
                 }
-                
-                answer[ay][ax] = val;
+                answer[y][x] = sum;
             }
         }
+        
         return answer;
     }
 }
+
+/**
+1,4  3,3
+3,2  3,3
+4,1 
+
+2,3,2  5,4,3
+4,2,4  2,4,1
+3,1,4  3,1,1
+**/
