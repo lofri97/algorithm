@@ -1,45 +1,42 @@
-
-
-import java.util.Arrays;
-
 class Solution {
-    int[] answer = {0, 0};
+    private int oneCnt = 0;
+    private int zeroCnt = 0;
     
     public int[] solution(int[][] arr) {
-
-        dfs(arr, 0, arr.length, 0, arr.length);
-
-        return answer;
+        
+        dfs(arr, 0, 0, arr.length);
+        
+        return new int[] { zeroCnt, oneCnt };
     }
-
-    void dfs(int[][] arr, int sy, int ey, int sx, int ex) {
-        int tmp = arr[sy][sx];
-        boolean flag = true;
-        for (int y = sy; y < ey ; y++) {
-            for (int x = sx; x < ex ; x++) {
-                if (arr[y][x] != tmp) {
-                    flag = false;
-                    break;
+    
+    void dfs(int[][] arr, int y, int x, int size) {
+        int curOneCnt = 0;
+        for (int cy = y; cy < y + size; cy++) {
+            for (int cx = x; cx < x + size; cx++) {
+                if (arr[cy][cx] == 1) {
+                    curOneCnt++;
                 }
             }
         }
-
-        if (flag) {
-            answer[tmp] += 1;
+        
+        if (curOneCnt == 0) {
+            zeroCnt++;
             return;
         }
-
-        if (ey-sy <= 2) {
-            for (int y = sy; y < ey; y++) {
-                for (int x = sx; x < ex; x++) {
-                    answer[arr[y][x]] += 1;
-                }
-            }
-        } else {
-            dfs(arr, sy, sy + (ey - sy) / 2, sx, sx +(ex - sx) / 2);
-            dfs(arr, sy, sy + (ey - sy) / 2, sx + (ex - sx) / 2, ex);
-            dfs(arr, sy + (ey - sy) / 2, ey, sx, sx + (ex - sx) / 2);
-            dfs(arr, sy + (ey - sy) / 2, ey, sx + (ex - sx) / 2, ex);
+        if (curOneCnt == size * size) {
+            oneCnt++;
+            return;
         }
+        
+        if (size == 2) {
+            zeroCnt += 4 - curOneCnt;
+            oneCnt += curOneCnt;
+            return;
+        }
+        
+        dfs(arr, y, x, size / 2);
+        dfs(arr, y, x + size / 2, size / 2);
+        dfs(arr, y + size / 2, x, size / 2);
+        dfs(arr, y + size / 2, x + size / 2, size / 2);
     }
 }
