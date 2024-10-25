@@ -1,21 +1,20 @@
-import java.util.*;
-
 class Solution {
     public int solution(int[][] triangle) {
-        int maxY = triangle.length - 1;
-        int maxX = triangle[maxY].length - 1;
-        int[][] dp = new int[maxY+1][maxX+1];
-        
-        
-        for (int i = 0; i <= maxX; i++) {
-            dp[maxY][i] = triangle[maxY][i];
-        }
-        
-        for (int y = maxY - 1; y >= 0; y--) {
-            for (int x = 0; x < triangle[y].length; x++) {
-                dp[y][x] = Math.max(dp[y+1][x], dp[y+1][x+1]) + triangle[y][x];
+        for (int y = 1; y < triangle.length; y++) {
+            for (int x = 0; x <= y; x++) {
+                if (x == 0) {
+                    triangle[y][x] = triangle[y-1][x] + triangle[y][x];
+                } else if (x == y) {
+                    triangle[y][x] = triangle[y-1][x-1] + triangle[y][x];
+                } else {
+                    triangle[y][x] = Math.max(triangle[y-1][x-1], triangle[y-1][x]) + triangle[y][x];
+                }
             }
         }
-        return dp[0][0];
+        int max = Integer.MIN_VALUE;
+        for (int val : triangle[triangle.length-1]) {
+            max = Math.max(max, val);
+        }
+        return max;
     }
 }
