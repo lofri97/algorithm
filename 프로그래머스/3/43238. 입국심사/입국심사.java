@@ -1,25 +1,25 @@
 class Solution {
     public long solution(int n, int[] times) {
-        long start = 0;
-        long end = 1000000000 * 1000000000L;
+        long s = 0;
+        long e = 1000000000 * 1000000000L;
         
-        while (start < end) {
-            long mid = (start + end) / 2;
+        while (s < e) {
+            long m = (s + e) / 2;
             
-            if (check(n, mid, times)) {
-                end = mid;
+            if (isLoe(n, m, times)) {
+                e = m;
             } else {
-                start = mid + 1;
+                s = m + 1;
             }
         }
-        return start;
+        return s;
     }
     
-    boolean check(int n, long minute, int[] times) {
+    boolean isLoe(int n, long m, int[] times) {
         long count = 0;
         
         for (int time : times) {
-            count += minute / time;
+            count += m / time;   
         }
         return n <= count;
     }
