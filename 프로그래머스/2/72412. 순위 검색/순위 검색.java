@@ -11,7 +11,6 @@ class Solution {
             String[] qArr = qq.replace("and ", "").split(" ");
             String cacheKey = qArr[0] + qArr[1] + qArr[2] + qArr[3];
             List<Integer> scores;
-            
             if (cache.containsKey(cacheKey)) {
                 scores = cache.get(cacheKey);
             } else {
@@ -57,10 +56,6 @@ class Solution {
             }
         }
 
-        if (s >= scores.size()) {
-            return scores.size();
-        }
-        
         if (scores.get(s) < score) {
             return scores.size();
         }
