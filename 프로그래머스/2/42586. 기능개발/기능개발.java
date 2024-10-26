@@ -6,31 +6,23 @@ class Solution {
         Queue<Integer> queue = new LinkedList<>();
         
         for (int i = 0; i < progresses.length; i++) {
-            int val = (100 - progresses[i]) / speeds[i];
-            if ((100 - progresses[i]) % speeds[i] != 0) {
-                val++;
-            }
-            queue.add(val);
+            int remain = 100 - progresses[i];
+            int days = remain / speeds[i];
+            days += remain % speeds[i] == 0 ? 0 : 1;
+            queue.add(days);
         }
         
-        int days = 1;
+        int day = 1;
+        
         while (!queue.isEmpty()) {
-            int val = queue.poll();
-            int count = 1;
-            if (days < val) {
-                days = val;
-            }
-            
-            while (!queue.isEmpty()) {
-                if (queue.peek() > days) {
-                    break;
-                }
+            if (queue.peek() > day) day = queue.peek();
+            int count = 0;
+            while (!queue.isEmpty() && queue.peek() <= day) {
                 queue.poll();
                 count++;
             }
             answer.add(count);
-            days++;
         }
-        return answer.stream().mapToInt(i -> i).toArray();
+        return answer.stream().mapToInt(v -> v).toArray();
     }
 }
