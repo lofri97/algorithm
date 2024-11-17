@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 public class Solution {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
         int tt = Integer.parseInt(br.readLine());
 
@@ -20,7 +21,8 @@ public class Solution {
                     a = a + b;
                 }
             }
-            System.out.printf("#%d %d %d\n", t+1, a, b);
+            sb.append(String.format("#%d %d %d\n", t+1, a, b));
         }
+        System.out.println(sb);
     }
 }
