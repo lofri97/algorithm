@@ -25,9 +25,12 @@ class Solution {
                          
             if (f1 == f2) {
                 return (int) (v1 - v2);
-            } else {
-                return f2 - f1 < 0 ? -1 : f2 - f1 > 0 ? 1 : 0;
-            }
+            } else if (f2 < f1) {
+                return -1;
+            } else if (f2 > f1) {
+                return 1;
+            } else
+                return 0;
         });
         
         return answer.stream().mapToInt(v->v).toArray();
