@@ -3,7 +3,7 @@ SELECT
     PT_NO,
     GEND_CD,
     AGE,
-    NVL(TLNO, 'NONE') as TLNO
+    IFNULL(TLNO, 'NONE') as TLNO
 FROM
     PATIENT
 WHERE
