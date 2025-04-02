@@ -1,8 +1,21 @@
-SELECT d.hour, COUNT(o.animal_id) AS count
-  FROM (SELECT LEVEL - 1 AS hour
-          FROM dual
-       CONNECT BY LEVEL <= 24) d
-  LEFT JOIN animal_outs o
-    ON d.hour = TO_CHAR(o.datetime, 'FMHH24')
- GROUP BY d.hour
- ORDER BY d.hour ASC;
+WITH RECURSIVE NUM AS (
+    SELECT 0 AS HOUR
+
+    UNION ALL
+
+    SELECT HOUR + 1 FROM NUM
+    WHERE HOUR < 23
+    )
+
+SELECT
+    n.HOUR,
+    IFNULL(t.DATE_COUNT,0) AS COUNT
+FROM 
+    NUM n
+    LEFT JOIN (
+        SELECT HOUR(DATETIME) AS HOUR, COUNT(*) DATE_COUNT
+        FROM ANIMAL_OUTS
+        GROUP BY HOUR(DATETIME)) t
+    ON n.HOUR = t.HOUR
+ORDER BY
+    HOUR ASC;
