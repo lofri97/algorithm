@@ -1,18 +1,17 @@
--- 코드를 작성해주세요
 SELECT
-    i.ITEM_ID,
-    i.ITEM_NAME,
-    i.RARITY
+    ITEM_ID,
+    ITEM_NAME,
+    RARITY
 FROM
-    ITEM_INFO i
-JOIN
-    ITEM_TREE t on i.ITEM_ID = t.ITEM_ID
+    ITEM_INFO
 WHERE
-    i.ITEM_ID NOT IN (
-        SELECT 
+    ITEM_ID NOT IN (
+        SELECT
             PARENT_ITEM_ID
         FROM
             ITEM_TREE
-        WHERE PARENT_ITEM_ID IS NOT NULL
+        WHERE
+            PARENT_ITEM_ID IS NOT NULL
     )
-ORDER BY ITEM_ID DESC
+ORDER BY
+    ITEM_ID DESC
